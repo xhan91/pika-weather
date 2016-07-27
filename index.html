@@ -13,7 +13,7 @@
 
 </head>
 <body>
-<section class="hero is-info is-large">
+<section class="hero is-info is-fullheight">
   <!-- Hero header: will stick at the top -->
   <div class="hero-head">
     <header class="nav">
@@ -21,7 +21,18 @@
         <div class="nav-left">
           <a class="nav-item">
             <img src="src/pika-icon.png" alt="Logo">
+            <span class="subtitle">Pika Weather</span>
           </a>
+        </div>
+        <div class="nav-center search-bar">
+            <form>
+          <div class="nav-item control has-addons">
+              <input class="input is-expanded" type="text" placeholder="Find a city" name="query">
+              <button class="button is-success">
+                Search
+              </button>
+          </div>
+            </form>
         </div>
         <span class="nav-toggle">
           <span></span>
@@ -29,21 +40,12 @@
           <span></span>
         </span>
         <div class="nav-right nav-menu">
-          <a class="nav-item is-active">
-            Home
-          </a>
-          <a class="nav-item">
-            Examples
-          </a>
-          <a class="nav-item">
-            Documentation
-          </a>
           <span class="nav-item">
-            <a class="button is-info is-inverted">
+            <a class="button is-info is-inverted" href="https://github.com/xhan91/pika-weather">
               <span class="icon">
                 <i class="fa fa-github"></i>
               </span>
-              <span>Download</span>
+              <span>Source Code</span>
             </a>
           </span>
         </div>
@@ -54,30 +56,20 @@
   <!-- Hero content: will be in the middle -->
   <div class="hero-body">
     <div class="container has-text-centered">
-      <h1 class="title">
-        Title
-      </h1>
-      <h2 class="subtitle">
-        Subtitle
-      </h2>
+      <div id="weather-field">
+        <h1 class="title" data-type="city">
+          Vancouver
+        </h1>
+        <h2 class="subtitle" data-type="weather">
+          Sunny
+        </h2>
+      </div>
+      <div id="result-field">
+        
+      </div>
     </div>
   </div>
 
-  <!-- Hero footer: will stick at the bottom -->
-  <div class="hero-foot">
-    <nav class="tabs is-boxed is-fullwidth">
-      <div class="container">
-        <ul>
-          <li class="is-active"><a>Overview</a></li>
-          <li><a>Modifiers</a></li>
-          <li><a>Grid</a></li>
-          <li><a>Elements</a></li>
-          <li><a>Components</a></li>
-          <li><a>Layout</a></li>
-        </ul>
-      </div>
-    </nav>
-  </div>
 </section>
   
 </body>

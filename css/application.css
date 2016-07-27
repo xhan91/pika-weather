@@ -1,0 +1,8 @@
+#result-field {
+  display: none;
+}
+
+.search-bar {
+  min-width: 300px;
+  max-width: 60%;
+}
