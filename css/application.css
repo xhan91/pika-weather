@@ -2,6 +2,10 @@
   display: none;
 }
 
+.city-cell {
+  cursor: pointer;
+}
+
 .search-bar {
   min-width: 300px;
   max-width: 60%;
