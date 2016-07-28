@@ -59,17 +59,24 @@
   <div class="hero-body">
     <div class="container has-text-centered">
       <div id="weather-field">
-        <img alt="icon">
-        <h1 class="title" id="city">
-        </h1>
-        <h2 class="subtitle" id="weather">
-        </h2>
+        <script id="weather-template" type="text/x-handlebars-template">
+          <div>
+            <img src="{{icon_url}}" alt="icon">
+            <h1 class="title">
+              {{display_location.full}}
+            </h1>
+            <h2 class="subtitle">
+              Temperature: {{temperature_string}} <br>
+              Feels Like: {{feelslike_string}} <br>
+              Relative Humidity: {{relative_humidity}} <br>
+              Solar Radiation: {{solarradiation}} <br>
+            </h2>
+          </div>
+        </script>
       </div>
       <div id="result-field">
         <script id="result-template" type="text/x-handlebars-template">
-          {{#each RESULTS}}
           <div><span class="city-cell" data-ll="{{ll}}">{{name}}</span></div>
-          {{/each}}
         </script>
       </div>
     </div>

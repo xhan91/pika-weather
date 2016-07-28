@@ -6,14 +6,14 @@ $(document).ready(function(){
     var weatherField = $('#weather-field');
 
     // Init the weather of current ip
-    // $.ajax({
-    //     method: 'get',
-    //     url: QUERY_PREFIX + 'autoip.json',
-    //     dataType: 'jsonp',
-    //     success: function(data){
-    //         renderWeather(data);
-    //     }
-    // });
+    $.ajax({
+        method: 'get',
+        url: QUERY_PREFIX + 'autoip.json',
+        dataType: 'jsonp',
+        success: function(data){
+            renderWeather(data);
+        }
+    });
 
 
     // Search for a list of related cities
@@ -50,7 +50,6 @@ $(document).ready(function(){
     resultField.on('click', '.city-cell', function(){
         var query = $(this).data('ll').replace(' ',',') + '.json';
         var url = QUERY_PREFIX + query;
-        console.log(url);
 
         $.ajax({
             method: 'get',
@@ -58,7 +57,7 @@ $(document).ready(function(){
             dataType: 'jsonp',
             beforeSend: function(){
                 resultField.hide();
-                cleanWeatherField();
+                weatherField.find('div').remove();
                 weatherField.show();
             },
             success: function(data){
@@ -67,45 +66,26 @@ $(document).ready(function(){
         })
     });
 
-    function cleanWeatherField(){
-        weatherField.find('img').attr('src', '');
-        weatherField.find('#city').text('');
-        weatherField.find('#weather').html('');
-    }
-
     function renderSearchResult(data){
-        // var html = '<div>';
-        // data.RESULTS.forEach(function(result){
-        //     if (result.type == 'city'){
-        //         var ll = result.ll;
-        //         ll = ll.replace(' ', ',');
-        //         var thisHtml = '<div><span class="city-cell" data-ll="' + ll + 
-        //             '">' + result.name + '</span></div>';
-        //         html += thisHtml;
-        //     }
-        // });
-
         var source = $('#result-template').html();
         var template = Handlebars.compile(source);
-        var html = template(data);
-        // var results = $(html);
+
+        data.RESULTS.forEach(function(result){
+            if (result.type == 'city'){
+                var html = template(result);
+                resultField.append(html);
+            }
+        });
         weatherField.hide();
-        resultField.append(html);
         resultField.show();
     }
 
     function renderWeather(data){
-        var ob = data.current_observation
-        var city = ob.display_location.full;
-        var weatherHtml = 'Weather: ' + ob.weather + '<br>' +
-            'Temperature: ' + ob.temperature_string + '<br>' +
-            'Feels Like: ' + ob.feelslike_string + '<br>' +
-            'Relative Humidity: ' + ob.relative_humidity + '<br>' +
-            'Solar Radiation: ' + ob.solarradiation;
+        var source = $('#weather-template').html();
+        var template = Handlebars.compile(source);
+        var html = template(data.current_observation);
 
-        weatherField.find('img').attr('src', ob.icon_url);
-        weatherField.find('#city').text(city);
-        weatherField.find('#weather').html(weatherHtml);
+        weatherField.append(html);
     }
 
 });
