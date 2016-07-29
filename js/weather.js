@@ -33,6 +33,9 @@ $(document).ready(function(){
             beforeSend: function(){
                 button.addClass('is-loading');
                 resultField.find('div').remove();
+                weatherField.fadeOut(1000, function(){
+                    resultField.fadeIn(1000);
+                })
             },
             complete: function(){
                 button.removeClass('is-loading');
@@ -56,9 +59,10 @@ $(document).ready(function(){
             url: url,
             dataType: 'jsonp',
             beforeSend: function(){
-                resultField.hide();
+                resultField.fadeOut(1000, function(){
+                    weatherField.fadeIn(1000);
+                });
                 weatherField.find('div').remove();
-                weatherField.show();
             },
             success: function(data){
                 renderWeather(data);
@@ -76,8 +80,8 @@ $(document).ready(function(){
                 resultField.append(html);
             }
         });
-        weatherField.hide();
-        resultField.show();
+        // weatherField.hide();
+        // resultField.fadeIn(1000);
     }
 
     function renderWeather(data){
@@ -86,6 +90,7 @@ $(document).ready(function(){
         var html = template(data.current_observation);
 
         weatherField.append(html);
+        // weatherField.fadeIn(1000);
     }
 
 });
